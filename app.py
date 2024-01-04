@@ -17,7 +17,7 @@ from sklearn.pipeline import make_pipeline
 from tensorflow.keras.models import load_model
 from sklearn.metrics import accuracy_score
 
-model_save_path = 'D:/vscode/rgr-streamlit/streamlit-models/'
+model_save_path = 'streamlit-models/'
 
 csgo_data = pd.read_csv('csgo.csv')
 X = csgo_data.drop('bomb_planted_True', axis=1)
