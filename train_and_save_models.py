@@ -19,19 +19,19 @@ X_train_kmeans = kmeans.fit_transform(X_train)
 X_test_kmeans = kmeans.transform(X_test)
 
 # Обучение моделей
-model_ml1 = LogisticRegression().fit(X_train_kmeans, y_train)
-model_ml4 = BaggingClassifier(base_estimator=LogisticRegression(), n_estimators=10).fit(X_train_kmeans, y_train)
+model_ml1 = LogisticRegression().fit(X_train, y_train)
+model_ml4 = BaggingClassifier(base_estimator=LogisticRegression(), n_estimators=10).fit(X_train, y_train)
 estimators = [('lr', LogisticRegression()), ('xgb', XGBClassifier())]
-model_ml5 = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression()).fit(X_train_kmeans, y_train)
-model_ml3 = XGBClassifier().fit(X_train_kmeans, y_train)
+model_ml5 = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression()).fit(X_train, y_train)
+model_ml3 = XGBClassifier().fit(X_train, y_train)
 model_ml6 = Sequential([
-    Dense(128, activation='relu', input_shape=(X_train_kmeans.shape[1],)),
+    Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
     Dropout(0.2),
     Dense(64, activation='relu'),
     Dense(1, activation='sigmoid')
 ])
 model_ml6.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-model_ml6.fit(X_train_kmeans, y_train, epochs=10, batch_size=32)
+model_ml6.fit(X, y_train, epochs=10, batch_size=32)
 
 # Сохранение моделей
 model_save_path = 'D:/vscode/rgr-streamlit/streamlit-models/'
